@@ -17,13 +17,15 @@ spec:
     spec:
       containers:
         - name: pod-requeue
-          image: deis/pod-requeue:v8
+          image: quay.io/openai/pod-requeue
           imagePullPolicy: Always
           env:
           - name: REQUEUE_SLEEP
-            value: 60
+            value: "60"
           command:
             - "/bin/bash"
             - "/pod-requeue.sh"
             # To disable dry-run uncomment the line below
-            #- "--execute"
+            - "--execute"
+      imagePullSecrets:
+      - name: quay-login-secret
